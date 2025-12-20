@@ -1,0 +1,29 @@
+project:
+  name: "MPESA Fraud Detection"
+  version: 1.0
+
+data:
+  raw: "./data/mpesa_transactions.csv"
+
+target:
+  - isFraud
+
+features:
+  - transaction_type
+  - amount
+  - oldbalanceOrg
+  - newbalanceOrig
+
+split:
+  test_size: 0.2
+  shuffle: shuffle
+  random_state: 42
+
+model:
+  type: "random_forest"
+  parameters:
+    n_estimators: 300
+    random_state: 42
+
+output:
+  "model_dir": "./models/model.pk1"

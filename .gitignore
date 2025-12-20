@@ -1,0 +1,14 @@
+# Large data files
+data/
+*.csv
+*.tsv
+*.parquet
+*.xlsx
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Virtual environments
+venv/
+.env/
