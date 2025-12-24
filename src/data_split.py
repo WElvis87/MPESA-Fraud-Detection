@@ -1,5 +1,10 @@
 from sklearn.model_selection import train_test_split
-from config import load_config
+import pandas as pd
+from pathlib import Path
+import sys
+
+sys.path.append(str(Path(__file__).resolve().parent.parent))
+from src.config import load_config
 
 class DataSplitError(Exception):
     pass
@@ -28,7 +33,7 @@ def split_data(df):
     random_state = config["split"]["random_state"]
 
     X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=test_size, random_state=random_state
+        X, y, test_size=test_size, random_state=random_state, stratify=y
     )
 
     return X_train, X_test, y_train, y_test

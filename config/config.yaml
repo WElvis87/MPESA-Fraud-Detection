@@ -18,6 +18,7 @@ split:
   test_size: 0.2
   shuffle: shuffle
   random_state: 42
+  class_weight: "balanced"
 
 model:
   type: "random_forest"
@@ -27,3 +28,4 @@ model:
 
 output:
   "model_dir": "./models/model.pk1"
+  "evaluation_report": "./reports/evaluation_report.md"

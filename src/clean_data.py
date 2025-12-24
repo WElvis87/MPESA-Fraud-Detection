@@ -1,5 +1,9 @@
 import pandas as pd
-from config import load_config
+from pathlib import Path
+import sys
+
+sys.path.append(str(Path(__file__).resolve().parent.parent))
+from src.config import load_config
 
 class CleanDataError(Exception):
     pass
@@ -25,11 +29,11 @@ def clean_data(df: pd.DataFrame) -> pd.DataFrame:
     # Drop duplicates
     df = df.drop_duplicates()
 
-    # Clip upper outliers for numeric columns
-    for col in required_columns:
-        if df[col].dtype in ["int64", "float64"]:
-            q90 = df[col].quantile(0.9)
-            df[col] = df[col].clip(upper=q90)
+    # # Clip upper outliers for numeric columns
+    # for col in required_columns:
+    #     if df[col].dtype in ["int64", "float64"]:
+    #         q90 = df[col].quantile(0.9)
+    #         df[col] = df[col].clip(upper=q90)
 
     df.reset_index(drop=True, inplace=True)
  

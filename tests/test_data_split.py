@@ -10,11 +10,11 @@ try:
     df = load_data()
     df = clean_data(df)
     X_train, X_test, y_train, y_test = split_data(df)
+    print(y_test.value_counts())
+    print(y_train.value_counts())
+
 
     print("Data Split Successfully")
-    print("X train", len(X_train))
-    print("X_test", len(X_test))
-    print("Y_Train", len(y_train))
-    print("Y_Test", len(y_test))
+
 except Exception as e:
     print("Failed to split the data", e)

@@ -1,7 +1,7 @@
 from load_data import load_data
 from clean_data import clean_data
 from data_split import split_data
-from train_model import create_model, train_model, evaluate_model, save_model
+from train_model import create_model, train_model, evaluate_model, create_evaluation_report, save_model
 
 def run_pipeline():
     print("=== Starting MPESA Fraud Detection Pipeline ===")
@@ -21,15 +21,15 @@ def run_pipeline():
     model = train_model(model, X_train, y_train)
     print("Model trained.")
 
-    metrics = evaluate_model(model, X_test, y_test)
-    print(f"Evaluation metrics: MAE={metrics['mae']:.2f}, RMSE={metrics['rmse']:.2f}")
+    cm, accuracy, ps, rs, f1, roc_auc, pr_auc, report, fraud_rate = evaluate_model(model, X_test, y_test)
 
-    path = save_model(model)
-    print(f"Model saved to {path}")
+    create_evaluation_report(cm, accuracy, ps, rs, f1, roc_auc, pr_auc, report, fraud_rate)
+
+    save_model(model)
 
     print("=== Pipeline completed Successfully ===")
 
-    return model, metrics
+    return model
 
 if __name__ == "__main__":
     run_pipeline()
